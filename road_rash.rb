@@ -38,9 +38,6 @@ def get_notes(activity)
   notes
 end
 
-
-
-
 page_num = 1
 rows = []
 
