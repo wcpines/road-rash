@@ -2,7 +2,7 @@ require 'byebug'
 require 'strava/api/v3'
 require 'csv'
 
-class Rasher
+class Harrier
 
   def initialize
     @client = Strava::Api::V3::Client.new(:access_token => ENV["STRAVA_ACCESS_TOKEN"])
@@ -78,5 +78,5 @@ class Rasher
 
 end
 
-r = Rasher.new
-r.gen_csv
+h = Harrier.new
+h.gen_csv

@@ -1,3 +1,4 @@
 notes.md
 *.csv
 *.csv*
+.byebug_history
