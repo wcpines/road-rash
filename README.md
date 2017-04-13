@@ -2,5 +2,3 @@ There doesn't appear to be a reasonable way to export data from Strava. If there
 
 I was going to scrape the site before realizing they had an open API.  The script's name comes from the original web scraping intention.
 
-
-

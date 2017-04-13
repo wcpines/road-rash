@@ -1,7 +1,18 @@
-require 'strava/api/v3'
 require 'csv'
 
 class Harrier
+
+  def initialize
+    @client = Strava::Api::V3::Client.new(:access_token => ENV["STRAVA_ACCESS_TOKEN"])
+    @page_num = 1
+    @rows = []
+    @gear_record = {}
+  end
+
+
+  def oauth
+    access_information = Strava::Api::V3::Auth.retrieve_access(client_id, client_secret, 'code')
+  end
 
   # TODO Error handling (rate limiting)
   def gen_csv
@@ -28,12 +39,6 @@ class Harrier
     end
   end
 
-  def initialize
-    @client = Strava::Api::V3::Client.new(:access_token => ENV["STRAVA_ACCESS_TOKEN"])
-    @page_num = 1
-    @rows = []
-    @gear_record = {}
-  end
 
   def get_gear(activity)
     if @gear_record[activity["gear_id"]]

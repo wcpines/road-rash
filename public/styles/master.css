@@ -2,17 +2,112 @@
   ALL
 *********************/
 
+/* Ensure background img does not repeat  */
+/* http://stackoverflow.com/a/33057806/4667820 */
+
+body:before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: url('/assets/home_img.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+
+/**********************
+  Export
+*********************/
+
+.export{
+  font-family: Permanent Marker;
+  font-style: Bold;
+  text-align: center;
+  color: #FF3500;
+}
+/**********************
+  Home
+*********************/
+
+.page-title {
+  background: #FFF;
+  padding: 0 15px;
+  height: 55px;
+  margin: 0 auto;
+  min-height: 55px;
+  width: 100%;
+  position: relative;
+  z-index: 50;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: Permanent Marker;
+  font-style: Bold;
+  text-align: center;
+  color: #FF3500;
+}
+
+.authorize{
+  font-family: Proxima Nova;
+  font-style: bold;
+  white-space:nowrap;
+  text-decoration:none;
+}
+
+#auth{
+  background-color:#FC4C02;
+  background-image: url('http://badges.strava.com/logo-strava-echelon.png');
+  background-repeat:no-repeat;
+  background-position:10px center;
+  padding: 5px 5px 5px 30px;
+  border-radius:3px;
+  text-align: center;
+  font-size:11px;
+}
+/* .credit { */
+/*   display:inline-block; */
+/*   background-color:#FC4C02; */
+/*   color: white; */
+/*   font-family: Proxima Nova; */
+/*   font-style: bold; */
+/*   white-space:nowrap; */
+/*   text-decoration:none; */
+/*   background-repeat:no-repeat; */
+/*   background-position:10px center; */
+/*   border-radius:3px; */
+/*   background-image: url('http://badges.strava.com/logo-strava-echelon.png'); */
+/*   padding: 5px 5px 5px 30px; */
+/*   font-size:11px; */
+/* } */
+/* .credit img{ */
+/*   margin-left:2px; */
+/*   vertical-align:text-bottom; */
+/*   height: 7; */
+/*   width: 51; */
+/* } */
 
 
 /************
 -- Fonts --
  ************/
 
-@import url(//fonts.googleapis.com/css?family=Raleway:400,300,600);
+@import url(//fonts.googleapis.com/css?family=Permanent+Marker);
 
 @font-face {
   font-family: Proxima Nova;
-  src: url(../fonts/Proxima Nova.ttf);
+  src: url(/../fonts/Proxima Nova.ttf);
   font-style: bold;
 }
 
