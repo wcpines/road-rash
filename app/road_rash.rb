@@ -1,8 +1,32 @@
-require 'byebug'
 require 'strava/api/v3'
 require 'csv'
 
 class Harrier
+
+  # TODO Error handling (rate limiting)
+  def gen_csv
+    runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
+    while runs && !runs.empty?
+      # begin
+      format_data(runs)
+      # rescue
+      @page_num += 1
+      runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
+    end
+
+    csv_options = {
+      write_headers: true,
+      headers: [
+        "name", "miles", "duration", "pace", "date",
+        "time", "shoe", "shoe-miles", "notes"
+      ]
+    }
+
+    CSV.open('test.csv', 'w', csv_options) do |csv_object|
+      @rows.each do |row|
+        csv_object << row end
+    end
+  end
 
   def initialize
     @client = Strava::Api::V3::Client.new(:access_token => ENV["STRAVA_ACCESS_TOKEN"])
@@ -50,33 +74,5 @@ class Harrier
   end
 
 
-  # TODO Error handling (rate limiting)
-  def gen_csv
-    runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
-    while runs && !runs.empty?
-      # begin
-      format_data(runs)
-      # rescue
-      @page_num += 1
-      runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
-    end
-
-    csv_options = {
-      write_headers: true,
-      headers: [
-        "name", "miles", "duration", "pace", "date",
-        "time", "shoe", "shoe-miles", "notes"
-      ]
-    }
-
-    CSV.open('test.csv', 'w', csv_options) do |csv_object|
-      @rows.each do |row|
-        csv_object << row
-      end
-    end
-  end
 
 end
-
-h = Harrier.new
-h.gen_csv
