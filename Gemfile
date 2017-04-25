@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'mail'
+gem 'resque'
 gem 'sinatra'
 gem 'oauth2'
 gem 'byebug'

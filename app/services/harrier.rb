@@ -1,28 +1,29 @@
 require 'csv'
 
 class Harrier
-
-  def initialize
-    @client = Strava::Api::V3::Client.new(:access_token => ENV["STRAVA_ACCESS_TOKEN"])
+  def initialize(token)
+    @client = Strava::Api::V3::Client.new(access_token: token)
     @page_num = 1
     @rows = []
     @gear_record = {}
   end
 
 
-  def oauth
-    access_information = Strava::Api::V3::Auth.retrieve_access(client_id, client_secret, 'code')
-  end
+  # def test
+  #   File.open('thing.txt', "w") do |file|
+  #     file.puts("sup dude")
+  #   end
+  # end
 
   # TODO Error handling (rate limiting)
   def gen_csv
-    runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
+    runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |activity| activity["type"] == "Run" })
     while runs && !runs.empty?
       # begin
       format_data(runs)
       # rescue
       @page_num += 1
-      runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |run| run["type"] == "Run" })
+      runs = (@client.list_athlete_activities(page: @page_num, per_page: 200).select { |activity| activity["type"] == "Run" })
     end
 
     csv_options = {
@@ -33,7 +34,7 @@ class Harrier
       ]
     }
 
-    CSV.open('test.csv', 'w', csv_options) do |csv_object|
+    CSV.open('../../logs.csv', 'w', csv_options) do |csv_object|
       @rows.each do |row|
         csv_object << row end
     end
@@ -48,7 +49,7 @@ class Harrier
       gear_row = [gear["name"], (gear["distance"]/1600).round(2)]
       @gear_record[activity["gear_id"]] = gear_row
     else
-      gear_row = "no gear listed"
+      gear_row = ["no  gear listed", "n/a"]
     end
   end
 
@@ -77,7 +78,4 @@ class Harrier
       @rows << row
     end
   end
-
-
-
 end

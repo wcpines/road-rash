@@ -7,8 +7,11 @@ Bundler.require
 CLIENT_URI = "http://127.0.0.1:9393"
 CLIENT_ID = ENV["STRAVA_CLIENT_ID"]
 CLIENT_SECRET = ENV["STRAVA_CLIENT_SECRET"]
+SESSION_SECRET = ENV["SESSION_SECRET"]
 
-# look in correct dir for templates
+# sinatra configurations
+enable :sessions
+set :session_secret, SESSION_SECRET
 set(:views, 'app/views')
 
 require_all('app/')
