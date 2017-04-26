@@ -1,11 +1,32 @@
+<!-- export.erb -->
+
 <div class="export">
-  <h2>Page in progress</h2>
-  <p>Hows about we build a lil sumthin ftl?</p>
 
-
-  <div class="row">
-    <form class="export" action="/export" method="post" >
-      <input id="button" type="submit" value="Get all my logs">
-    </form>
+  <div class="left six columns">
+    <br>
   </div>
+
+  <div class="right six columns">
+    <h5>Export the following fields : </h5>
+    <ul>
+      <li> name </li>
+      <li> date </li>
+      <li> miles </li>
+      <li> pace </li>
+      <li> time </li>
+      <li> duration </li>
+      <li> shoe </li>
+      <li> shoe-miles </li>
+      <li> description </li>
+    </ul>
+    <form id="export-form" action="/export" method="post">
+      <input id="export-button" type="submit" value="Get running logs">
+    </form>
+
+    <div class="instructions seven columns">
+
+    </div>
+
+  </div>
+  <script type=text/javascript src="/javascripts/send.js"></script>
 </div>

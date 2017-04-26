@@ -1,4 +1,5 @@
-require_relative "app/services/courier.rb"
-require "resque/tasks"
-
-# not sure what goes here tbh
+require 'resque/tasks'
+require 'strava/api/v3'
+require 'mail'
+require_relative './app/services/courier.rb'
+require_relative './app/services/harrier.rb'

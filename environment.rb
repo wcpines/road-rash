@@ -13,5 +13,8 @@ SESSION_SECRET = ENV["SESSION_SECRET"]
 enable :sessions
 set :session_secret, SESSION_SECRET
 set(:views, 'app/views')
+set :allow_origin, :any
+set :allow_methods, [:post, :options]
+set :expose_headers, ['Content-Type']
 
 require_all('app/')

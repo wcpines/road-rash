@@ -1,11 +1,22 @@
-/**********************
-  ALL
-*********************/
+/*********
+-- All --
+*********/
+
+/* https://css-tricks.com/transitions-only-after-page-load/ */
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+/*********
+-- Home --
+*********/
 
 /* Ensure background img does not repeat  */
 /* http://stackoverflow.com/a/33057806/4667820 */
-
-body:before {
+.home:before {
   content: "";
   display: block;
   position: fixed;
@@ -22,92 +33,183 @@ body:before {
 }
 
 
-
-
-/**********************
-  Export
-*********************/
-
-.export{
+.page-title {
+  background: white;
+  color: black;
   font-family: Permanent Marker;
   font-style: Bold;
-  text-align: center;
-  color: #FF3500;
-}
-/**********************
-  Home
-*********************/
-
-.page-title {
-  background: #FFF;
-  padding: 0 15px;
   height: 55px;
   margin: 0 auto;
   min-height: 55px;
-  width: 100%;
+  padding: 0 15px;
   position: relative;
+  text-align: center;
+  user-select: none;
+  width: 100%;
   z-index: 50;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  font-family: Permanent Marker;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+
+.auth {
+  font-family: 'Raleway', sans-serif;
+  font-style: bold;
+  text-align: center;
+  vertical-align: center;
+}
+
+#auth-button {
+  background-color: #FA6000;;
+  background-image: url('http://badges.strava.com/logo-strava-echelon.png');
+  background-repeat:no-repeat; background-position:9px center;
+  border-color: #4C4C4C;
+  border-radius: 20px;
+  color: #4C4C4C;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -webkit-transition: all ease 0.7s;
+}
+
+#auth-button:hover{
+  box-shadow: inset 400px 0 0 0 #FA4000;
+  color: #fff;
+}
+
+/***********
+-- Export --
+************/
+
+.left:before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: -10;
+  background: url('/assets/snow_running.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.right:before{
+  content: "";
+  display: block;
+  position: fixed;
+  height: 100%;
+  z-index: -10;
+  background-color: grey;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.right {
+  padding: 10% 0% 10% 0%;
+  font-family: 'Raleway', sans-serif;
   font-style: Bold;
   text-align: center;
-  color: #FF3500;
 }
 
-.authorize{
-  font-family: Proxima Nova;
-  font-style: bold;
-  white-space:nowrap;
-  text-decoration:none;
+h5 {
+  font-family: Permanent Marker;
 }
 
-#auth{
-  background-color:#FC4C02;
-  background-image: url('http://badges.strava.com/logo-strava-echelon.png');
-  background-repeat:no-repeat;
-  background-position:10px center;
-  padding: 5px 5px 5px 30px;
-  border-radius:3px;
-  text-align: center;
-  font-size:11px;
-}
-/* .credit { */
-/*   display:inline-block; */
-/*   background-color:#FC4C02; */
-/*   color: white; */
-/*   font-family: Proxima Nova; */
-/*   font-style: bold; */
-/*   white-space:nowrap; */
-/*   text-decoration:none; */
-/*   background-repeat:no-repeat; */
-/*   background-position:10px center; */
-/*   border-radius:3px; */
-/*   background-image: url('http://badges.strava.com/logo-strava-echelon.png'); */
-/*   padding: 5px 5px 5px 30px; */
-/*   font-size:11px; */
-/* } */
-/* .credit img{ */
-/*   margin-left:2px; */
-/*   vertical-align:text-bottom; */
-/*   height: 7; */
-/*   width: 51; */
-/* } */
+.right ul {
+  font-family: Dejavu Sans Mono;
+  list-style-type: none;
+  column-count: 3;
+  padding-left: 10%;
+  margin-left: 8%;
+  margin-bottom: 10%;
+  margin-top: 5%;
 
+}
+
+.right li {
+  text-align: left;
+  margin: 0;
+
+}
+
+#export-button {
+  background-color: #FA6000;
+  border-color: #4C4C4C;
+  border-radius: 20px;
+  color: #4C4C4C;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all ease 0..s;
+  -moz-transition: all ease 0.3s;
+  -webkit-transition: all ease 0.3s;
+}
+
+#export-button:hover {
+  background-color: #FA4000;
+  color: white;
+}
+
+.instructions {
+  color: #3498DB;
+  font-style: italic;
+  margin-left: 23%;
+  margin-top: 5;
+  padding-left: 1%;
+  text-align: left;
+  -webkit-animation: fadein 1.0s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1.0s; /* Firefox < 16 */
+  -ms-animation: fadein 1.0s; /* Internet Explorer */
+  -o-animation: fadein 1.0s; /* Opera < 12.1 */
+  animation: fadein 1.0s;
+}
 
 /************
 -- Fonts --
  ************/
 
 @import url(//fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(//fonts.googleapis.com/css?family=Raleway);
 
-@font-face {
-  font-family: Proxima Nova;
-  src: url(/../fonts/Proxima Nova.ttf);
-  font-style: bold;
+/***************
+-- Animations --
+ ***************/
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
