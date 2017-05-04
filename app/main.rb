@@ -15,27 +15,17 @@ post '/login' do
 end
 
 get '/export'do
-  code = request.params["code"]
-  access_data = Strava::Api::V3::Auth.retrieve_access(CLIENT_ID, CLIENT_SECRET, code)
-  session["token"] = access_data["access_token"]
-  session["email"] = access_data["athlete"]["email"]
-  session["firstname"] = access_data["athlete"]["firstname"]
   erb :export
 end
 
-before do
-  headers(
-    {
-      'Access-Control-Allow-Origin' => '*',
-      'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
-    }
-  )
-end
 
 post '/export' do
-  token = session["token"]
-  email_address = session["email"]
-  name = session["firstname"]
-  Courier.test(email_address, name, token)
-  # Resque.enqueue(Courier, email_address, name, token)
+  code = request.env["HTTP_REFERER"].split("&")[1].split("=")[1]
+  access_data = Strava::Api::V3::Auth.retrieve_access(CLIENT_ID, CLIENT_SECRET, code)
+
+  token = access_data["access_token"]
+  email_address = access_data["athlete"]["email"]
+  name = access_data["athlete"]["firstname"]
+
+  Resque.enqueue(Courier, email_address, name, token)
 end

@@ -10,6 +10,16 @@
   -o-transition: none !important;
 }
 
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
 /*********
 -- Home --
 *********/
@@ -147,7 +157,6 @@ h5 {
   border-color: #4C4C4C;
   border-radius: 20px;
   color: #4C4C4C;
-  cursor: pointer;
   font-size: 12px;
   transition: all ease 0..s;
   -moz-transition: all ease 0.3s;
@@ -155,8 +164,15 @@ h5 {
 }
 
 #export-button:hover {
+  cursor: pointer;
   background-color: #FA4000;
   color: white;
+}
+
+#export-button.disabled{
+  color: white;
+  cursor: default;
+  background-color: #FA4000;
 }
 
 .instructions {

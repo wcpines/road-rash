@@ -1,25 +1,20 @@
-// Goals
-
-// - button changes in response to click
-// - button disabled
-// - pointer becomes arrow
-// - export text shown underneath
-// - request sent to server to export logs
-
-var exportForm = document.querySelector("#export-form")
+var exportForm   = document.querySelector("#export-form")
     exportButton = document.querySelector("#export-button")
     instructions = document.querySelector(".instructions");
+    xhr          = new XMLHttpRequest(),
+    url          = '/export';
 
-exportForm.onsubmit = function(e) {
-  // exportButton.style.cursor = "pointer";
-  // exportButton.style.color = "white";
-  // exportButton.style.background-color = "#FA4000";
+function sendIt(e) {
   e.preventDefault();
+
+  exportButton.className = "disabled";
   exportButton.value = "Exporting!";
   exportButton.disabled = true;
-  $.ajax({
-    url: 'http://localhost:9393/export',
-    method: 'POST',
-  });
-  instructions.innerText = "Exporting your logs might take a while, and will be emailed to you upon completion. If you do not see them, try checking your spam folder.";
+
+  xhr.open('POST', url, true);
+  xhr.send();
+
+
+  instructions.innerText = "Exporting your logs can take a while.  They'll be emailed to you when they're finished. If you don't see them, be sure to check your spam folder.";
 }
+
