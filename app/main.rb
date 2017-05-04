@@ -23,16 +23,16 @@ get '/export'do
   erb :export
 end
 
-options '/export' do
-  cross_origin
-  response.headers["Allow"] = "HEAD,POST,OPTIONS"
-  response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Origin, Accept"
-  response["Access-Control-Allow-Origin"] = "*"
-  200
+before do
+  headers(
+    {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
+    }
+  )
 end
 
 post '/export' do
-  cross_origin
   token = session["token"]
   email_address = session["email"]
   name = session["firstname"]

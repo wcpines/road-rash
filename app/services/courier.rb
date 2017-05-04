@@ -8,6 +8,8 @@ class Courier
 
   def self.perform(email_address, name, token)
     harrier = Harrier.new(token)
+    harrier.get_activity_ids
+    harrier.get_activity_data
     harrier.gen_csv
 
     Mail.defaults do
@@ -21,13 +23,12 @@ class Courier
       })
     end
 
-
     mail = Mail.new do
       from('roadrash.csv.exporter@gmail.com')
       to("#{email_address}")
       subject("#{name} Strava Logs")
       body("Please find your runnings logs attached.  Questions or concerns can
-           be sent to roadrash.csv.exporter@gmail.com"
+         be sent to roadrash.csv.exporter@gmail.com"
           )
       add_file("../../logs.csv")
     end
