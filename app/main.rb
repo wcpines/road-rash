@@ -1,5 +1,3 @@
-require 'sinatra/cross_origin'
-
 get '/' do
   erb :index
 end

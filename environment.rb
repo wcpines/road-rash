@@ -2,19 +2,21 @@
 require 'bundler/setup'
 Bundler.require
 
-
 # set env var constants
-CLIENT_URI = "http://127.0.0.1:9393"
+CLIENT_URI = ENV["STRAVA_CLIENT_URI"]
 CLIENT_ID = ENV["STRAVA_CLIENT_ID"]
 CLIENT_SECRET = ENV["STRAVA_CLIENT_SECRET"]
 SESSION_SECRET = ENV["SESSION_SECRET"]
+REDIS_URL = ENV["REDIS_URL"] || "redis://localhost:6379"
 
-# sinatra configurations
+# sinatra config
 enable :sessions
 set :session_secret, SESSION_SECRET
-set(:views, 'app/views')
-set :allow_origin, :any
-set :allow_methods, [:post, :options]
-set :expose_headers, ['Content-Type']
+set :views, 'app/views'
+
+# Redis config
+uri = URI.parse(REDIS_URL)
+REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+Resque.redis = REDIS
 
 require_all('app/')

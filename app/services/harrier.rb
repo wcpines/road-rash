@@ -57,6 +57,7 @@ class Harrier
 				row = [name, miles, minutes_duration, mile_pace, date, time, gear_name, gear_distance, description]
 			rescue Strava::Api::V3::ClientError => e
 				if e.message.include?("rate limit")
+          puts "sleeping for 15 minutes due to rate limits"
 					sleep 900
 					retry
 				else
