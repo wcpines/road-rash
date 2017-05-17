@@ -17,6 +17,6 @@ set :views, 'app/views'
 # Redis config
 uri = URI.parse(REDIS_URL)
 REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-Resque.redis = REDIS
+$redis = Resque.redis = REDIS # http://stackoverflow.com/a/32642076/4667820?
 
 require_all('app/')

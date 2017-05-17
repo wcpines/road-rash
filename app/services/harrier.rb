@@ -17,7 +17,7 @@ class Harrier
       ]
     }
 
-    CSV.open('../../logs.csv', 'w', csv_options) do |csv_object|
+    CSV.open('../../tmp/logs.csv', 'w', csv_options) do |csv_object|
       @rows.each do |row|
         csv_object << row
       end
