@@ -1,7 +1,15 @@
-NB: This is WIP
+There doesn't appear to be a way to export activities from Strava other than GPX/TCX data files. I prefer a simple history of my runs as a CSV, so I threw together something that makes the necessary API calls to retrieve the activities and email them to you as a CSV.
 
-There doesn't appear to be a reasonable way to export data from Strava. If there is a way to get csv data, fantastic.  Until such time, I put together a little script to do that.
+The CSV includes the following fields when available:
 
-I was going to scrape the site before realizing they had an open API.  The script's name comes from the original web scraping intention.
+- name
+- miles
+- duration
+- pace
+- date
+- time
+- shoe
+- shoe-miles
+- description
 
-
+Though complete, this site is still somewhat experimental.  Strava has fairly strict rate limiting, which I do my best to handle by queueing export requests and waiting 15 minutes when the limits are reached before retrying the API call.  This still may not be enough to handle a large number of concurrent export requests.  Also please note that this does not export cycling data but I'd certainly consider adding an option to export cycling history (separately) if there is demand.  PRs are also welcome.
