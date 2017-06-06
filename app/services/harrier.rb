@@ -36,16 +36,16 @@ class Harrier
   end
 
 
-	def get_activity_data
-		@ids.flatten.each do |id|
-			begin
-				activity = @client.retrieve_an_activity(id)
-				name = activity["name"]
-				miles = (activity["distance"]/1600).round(2)
-				minutes_duration = (activity["moving_time"]/60).round(2)
-				mile_pace = (1/(activity["average_speed"]/1600 * 60)).round(2)
-				date = DateTime.parse(activity["start_date_local"]).strftime("%m/%d/%Y")
-				time = DateTime.parse(activity["start_date_local"]).strftime("%T")
+  def get_activity_data
+    @ids.flatten.each do |id|
+      begin
+        activity = @client.retrieve_an_activity(id)
+        name = activity["name"]
+        miles = (activity["distance"]/1600).round(2)
+        minutes_duration = (activity["moving_time"]/60).round(2)
+        mile_pace = (1/(activity["average_speed"]/1600 * 60)).round(2)
+        date = DateTime.parse(activity["start_date_local"]).strftime("%m/%d/%Y")
+        time = DateTime.parse(activity["start_date_local"]).strftime("%T")
         if activity["gear"]
           gear_name = activity["gear"]["name"]
           gear_distance = activity["gear"]["distance"]/1600.round(2)
@@ -53,19 +53,19 @@ class Harrier
           gear_name = "n/a"
           gear_distance = "n/a"
         end
-				description = activity["description"]
-				row = [name, miles, minutes_duration, mile_pace, date, time, gear_name, gear_distance, description]
-			rescue Strava::Api::V3::ClientError => e
-				if e.message.include?("rate limit")
+        description = activity["description"]
+        row = [name, miles, minutes_duration, mile_pace, date, time, gear_name, gear_distance, description]
+      rescue Strava::Api::V3::ClientError => e
+        if e.message.include?("rate limit")
           puts "sleeping for 15 minutes due to rate limits"
-					sleep 900
-					retry
-				else
-					row = "Misc API error prevented successful export of this activity"
-				end
-			end
-			@rows << row
-		end
-	end
+          sleep 900
+          retry
+        else
+          row = "Misc API error prevented successful export of this activity"
+        end
+      end
+      @rows << row
+    end
+  end
 
 end
