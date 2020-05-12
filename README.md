@@ -1,3 +1,5 @@
+NB: This project is not maintained 
+
 There doesn't appear to be a way to export activities from Strava other than GPX/TCX data files. I prefer a simple history of my runs as a CSV, so I threw together something that makes the necessary API calls to retrieve the activities and email them to you as a CSV.
 
 The CSV includes the following fields when available:
